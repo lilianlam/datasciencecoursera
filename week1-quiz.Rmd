@@ -1,0 +1,90 @@
+---
+title: "R Week 1 Quiz"
+author: "Lilian"
+date: "7/30/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Solutions to problem set using hw1_data 
+
+First, I used RStudio to import the .csv data (I had to upload this from my local directory to kgen using scp). This required installation of the readr package, followed by read_csv()
+
+```{r load}
+library(readr)
+hw1_data <- read.csv("/gfs/work/llam/R-lessons/datasciencecoursera/hw1_data.csv")
+```
+
+11) In the dataset provided for this Quiz, what are the column names of the dataset?
+
+```{r 11}
+colnames(hw1_data)
+```
+
+
+12) Extract the first 2 rows of the data frame and print them to the console.
+```{r 12}
+hw1_data[1:2,]
+```
+
+
+13) How many observations (i.e. rows) are in this data frame?
+```{r 13}
+nrow(hw1_data)
+```
+
+
+14) Extract the last 2 rows of the data frame and print them to the console. What does the output look like?
+```{r 14}
+hw1_data[152:153, ]
+tail(hw1_data, n=2)
+```
+
+
+15) What is the value of Ozone in the 47th row?
+```{r 15}
+hw1_data$Ozone[47]
+```
+
+
+16) How many missing values are in the Ozone column of this data frame?
+```{r 16}
+is.na(hw1_data$Ozone)
+```
+then sum these to get the count of NA = TRUE
+```{r 16b}
+sum(is.na(hw1_data$Ozone))
+```
+
+
+17) What is the mean of the Ozone column in this dataset? Exclude missing values (coded as NA) from this calculation.
+
+We need to remove NA by na.rm = TRUE
+```{r 17}
+mean(hw1_data$Ozone, na.rm = TRUE)
+```
+
+
+18) Extract the subset of rows of the data frame where Ozone values are above 31 and Temp values are above 90. What is the mean of Solar.R in this subset?
+```{r 18}
+mean(hw1_data[which(hw1_data$Ozone > 31 & hw1_data$Temp > 90),]$Solar.R)
+```
+
+
+19) What is the mean of "Temp" when "Month" is equal to 6?
+```{r 19}
+mean(hw1_data[which(hw1_data$Month == 6),]$Temp)
+```
+
+
+20) What was the maximum ozone value in the month of May (i.e. Month is equal to 5)?
+```{r 20}
+max(hw1_data[which(hw1_data$Month == 5),]$Ozone, na.rm = TRUE)
+```
+
+
+
+
